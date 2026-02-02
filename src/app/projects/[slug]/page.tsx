@@ -1,9 +1,6 @@
 import { notFound } from "next/navigation";
 import { getProjectBySlug, getAllProjects } from "@/lib/projects";
-import McMasterExoskeleton from "@/app/projects/components/mcmaster-exoskeleton";
-
 const componentMap: Record<string, React.ComponentType> = {
-  "mcmaster-exoskeleton": McMasterExoskeleton,
 };
 
 interface Props {
