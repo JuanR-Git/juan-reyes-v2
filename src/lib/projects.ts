@@ -11,11 +11,11 @@ export interface ProjectMeta {
 export const projects: ProjectMeta[] = [
   {
     slug: "mcmaster-exoskeleton",
-    title: "McMaster Exoskeleton",
+    title: "Smart-E Pants",
     description:
-      "A powered upper-body exoskeleton designed to assist rehabilitation patients with controlled, repeatable range-of-motion exercises. Custom actuators, real-time sensor fusion, and a clinician-facing control interface.",
-    tags: ["ROS2", "C++", "Python", "SolidWorks", "Embedded"],
-    thumbnail: "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=1200&q=85&auto=format&fit=crop",
+      "A powered upper-body exoskeleton designed to compete in the Applied Collegiate Exoskeleton Competition. Custom actuators, real-time sensor fusion, and a clinician-facing control interface.",
+    tags: ["Python", "C++", "Simulink", "Controls"],
+    thumbnail: "/img/smartepants_cover.JPG",
     year: "2025",
     category: "embedded",
   },
@@ -23,29 +23,19 @@ export const projects: ProjectMeta[] = [
     slug: "chessmate",
     title: "ChessMate",
     description:
-      "A robotic chessboard that integrates AI and hardware to create a real-time game experience at home. Magnetic piece movement, computer vision for board state detection, and multiple AI difficulty levels.",
-    tags: ["Python", "OpenCV", "Arduino", "Stockfish", "3D Printing"],
-    thumbnail: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnRtOWR5NWt1dGV1cXVyOWNqcTN6dHFhbGxhZjV5NWJhMjZlNXZhaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKSjRrfIPjeiVyM/giphy.gif",
+      "A robotic chessboard built at Hack the North 2025 that integrates AI and hardware to create a real-time game experience. Magnetic piece movement, computer vision for board state detection, and multiple AI difficulty levels.",
+    tags: ["Python", "OpenCV", "Arduino", "Raspberry Pi", "3D Printing"],
+    thumbnail: "/video/chessmate_cover.mp4",
     year: "2025",
     category: "embedded",
   },
   {
-    slug: "snoopi",
-    title: "SNOOPI",
-    description:
-      "A companion robotic dog for hospital patients. Provides emotional support through responsive behavior, monitors patient vitals via onboard sensors, and alerts staff to anomalies.",
-    tags: ["ROS2", "Python", "TensorFlow", "Raspberry Pi", "CAD"],
-    thumbnail: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXJ6bWw0OGNkMnJ0ZHBtcmRqeWFhcnFnODl6MWx5aWlhcG5uMHBheSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mCRJDo24UvJMA/giphy.gif",
-    year: "2024",
-    category: "embedded",
-  },
-  {
     slug: "carlos-portfolio",
-    title: "Carlos Portfolio",
+    title: "Photography Portfolio",
     description:
       "A portfolio website designed and developed for my brother. Custom design system, smooth animations, and a focus on showcasing creative work with a distinctive visual identity.",
     tags: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-    thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=85&auto=format&fit=crop",
+    thumbnail: "/video/carlosPortfolio_cover.mp4",
     year: "2024",
     category: "software",
   },
@@ -53,9 +43,9 @@ export const projects: ProjectMeta[] = [
     slug: "trace-ai",
     title: "TraceAI",
     description:
-      "A VS Code extension that integrates AI prompts into the GitHub commit workflow. Automatically generates context-aware commit messages, PR descriptions, and changelog entries from staged diffs.",
+      "A VS Code extension built at DeltaHacks 2026 that integrates AI prompts into the GitHub commit workflow. Automatically generates context-aware commit messages, PR descriptions, and changelog entries from staged diffs.",
     tags: ["TypeScript", "VS Code API", "OpenAI", "Git"],
-    thumbnail: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2pyMHpteTdtNm9paHlkbmV5MXVtMnVuOGgxMGdzZXJ4d3NibnFnZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tn33aiTi1jkl6H6/giphy.gif",
+    thumbnail: "/video/traceai_cover.mp4",
     year: "2025",
     category: "software",
   },
@@ -65,9 +55,49 @@ export const projects: ProjectMeta[] = [
     description:
       "A pacemaker with an interactive UI for real-time monitoring and settings adjustment. Hardware simulation of cardiac pacing modes with a clinician-facing dashboard for parameter tuning and telemetry.",
     tags: ["Python", "MATLAB", "Simulink", "Tkinter", "Serial"],
-    thumbnail: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGV6cWF4Z2NyMHphbmgzNjlhM3d6NW5wdDNrMnB6ZHRuY3J4bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlBO7eyXzSZkJri/giphy.gif",
+    thumbnail: "/img/paced_cover.png",
     year: "2024",
     category: "embedded",
+  },
+  {
+    slug: "blinking-id",
+    title: "Blinking ID",
+    description:
+      "A digital circuit that sequentially displays 7 of 9 digits of my student ID in a loop. Designed in NI Multisim and built on a breadboard using NAND gates, JK flip-flops, and a seven-segment display.",
+    tags: ["NI Multisim", "Digital Logic", "NAND Gates", "JK Flip-Flops"],
+    thumbnail: "/video/blinkid_cover.mp4",
+    year: "2024",
+    category: "embedded",
+  },
+  {
+    slug: "recycle-bot",
+    title: "Recycle Bot",
+    description:
+      "Programmed a Q-Bot robot using custom Python-based simulation software for testing navigation and control algorithms. Validated code in simulation before deploying to physical bots.",
+    tags: ["Python", "Robotics", "Simulation", "Navigation"],
+    thumbnail: "/video/recycleBot_cover.mp4",
+    year: "2023",
+    category: "embedded",
+  },
+  {
+    slug: "juan-reyes-v1",
+    title: "Juan Reyes V1.0",
+    description:
+      "My original portfolio website built in Angular with custom Bootstrap and SCSS styling. Features Particles.js backgrounds, a reactive contact form powered by Formspree, and a typing animation.",
+    tags: ["Angular", "Bootstrap", "SCSS", "Particles.js", "Formspree"],
+    thumbnail: "/video/juanreyesv1_cover.mp4",
+    year: "2022",
+    category: "software",
+  },
+  {
+    slug: "wary",
+    title: "Wary",
+    description:
+      "A front-end project created at TOHacks 2022. A React-based website for anonymously reporting suspicions within local communities, focused on safety and accessibility.",
+    tags: ["React", "JavaScript", "CSS", "Hackathon"],
+    thumbnail: "/video/wary_cover.mp4",
+    year: "2022",
+    category: "software",
   },
   {
     slug: "nba-injury-predictor",
@@ -84,8 +114,8 @@ export const projects: ProjectMeta[] = [
     title: "Credit Classifier",
     description:
       "An application that predicts your credit class based on financial history. Ensemble ML models with explainable AI outputs so users understand the factors driving their classification.",
-    tags: ["Python", "XGBoost", "SHAP", "FastAPI", "React"],
-    thumbnail: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&auto=format&fit=crop",
+    tags: ["PyTorch", "Neural Networks", "scikit-learn", "Seaborn"],
+    thumbnail: "/img/creditcardclass_cover.png",
     year: "2024",
     category: "ml",
   },
