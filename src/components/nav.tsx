@@ -17,6 +17,14 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   return (
     <motion.nav
       initial={{ opacity: 0, y: -10 }}
@@ -30,13 +38,28 @@ export default function Nav() {
     >
       <Link
         href="/"
-        className="font-[family-name:var(--font-display)] text-sm font-semibold tracking-wide text-fg-primary hover:text-accent-blue transition-colors duration-300"
+        className="font-[family-name:var(--font-display)] text-base md:text-lg font-semibold tracking-wide text-fg-primary hover:text-accent-blue transition-colors duration-300"
       >
         Juan Reyes
       </Link>
 
-      <div className="flex items-center gap-6">
-        {!isHome && (
+      <div className="flex items-center gap-8">
+        {isHome ? (
+          <>
+            <button
+              onClick={() => scrollTo("projects")}
+              className="font-[family-name:var(--font-display)] text-sm md:text-base font-medium text-fg-muted hover:text-accent-blue transition-colors duration-300"
+            >
+              Projects
+            </button>
+            <button
+              onClick={() => scrollTo("about")}
+              className="font-[family-name:var(--font-display)] text-sm md:text-base font-medium text-fg-muted hover:text-accent-blue transition-colors duration-300"
+            >
+              About
+            </button>
+          </>
+        ) : (
           <motion.div
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -44,7 +67,7 @@ export default function Nav() {
           >
             <Link
               href="/"
-              className="text-sm text-fg-muted hover:text-accent-blue transition-colors duration-300"
+              className="font-[family-name:var(--font-display)] text-sm md:text-base font-medium text-fg-muted hover:text-accent-blue transition-colors duration-300"
             >
               All Projects
             </Link>
