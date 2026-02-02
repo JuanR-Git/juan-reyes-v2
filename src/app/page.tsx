@@ -10,7 +10,7 @@ import RotatingText from "@/components/rotating-text";
 import HeroNameReveal from "@/components/hero-name-reveal";
 import MagneticCursor from "@/components/magnetic-cursor";
 import ChibiAvatar from "@/components/chibi-avatar";
-import { getAllProjects } from "@/lib/projects";
+import { getAllProjects, type ProjectMeta } from "@/lib/projects";
 
 function ScrollReveal({
   children,
@@ -80,26 +80,79 @@ const filters = [
 
 const aboutPhotos = [
   {
-    src: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=1067&fit=crop",
-    title: "In the Lab",
-    description: "Assembling and testing a robotic exoskeleton prototype for my capstone project at McMaster.",
+    src: "/img/aboutme1.jpg",
+    title: "Reading Week Trip",
+    description: "Exploring Havana instead of textbooks — turns out reading week has nothing to do with reading.",
   },
   {
-    src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=1067&fit=crop",
-    title: "Demo Day",
-    description: "Presenting the AI-powered chess board to faculty and industry judges at our engineering showcase.",
+    src: "/img/aboutme2.png",
+    title: "Bouldering",
+    description: "Clinging to rocks at the Niagara Glen because apparently falling off walls is a hobby now.",
   },
   {
-    src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=1067&fit=crop",
-    title: "Hackathon Weekend",
-    description: "Building a working prototype from scratch with my team over 48 hours at DeltaHacks.",
+    src: "/img/aboutme3.jpg",
+    title: "Exoskeleton Comp",
+    description: "Squad photo with every team at the Applied Collegiate Exoskeleton Competition — plus the exoskeletons, obviously.",
   },
   {
-    src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=1067&fit=crop",
-    title: "On Campus",
-    description: "Walking through McMaster's campus in Hamilton — home for the last five years.",
+    src: "/img/aboutme4.jpg",
+    title: "Hack the North",
+    description: "Walking into Waterloo E7 with zero sleep scheduled for the next 36 hours. Worth it.",
   },
 ];
+
+/* ═══ Projects Grid Section ═══ */
+
+function ProjectsSection({
+  projects,
+  activeFilter,
+  setActiveFilter,
+}: {
+  projects: ProjectMeta[];
+  activeFilter: string;
+  setActiveFilter: (v: string) => void;
+}) {
+  return (
+    <section id="projects" className="relative py-20 md:py-28">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
+        {/* Section header */}
+        <ScrollReveal className="mb-12 md:mb-16">
+          <span className="text-[11px] tracking-[0.15em] uppercase text-accent-blue font-semibold block mb-3">
+            Selected Work
+          </span>
+          <h2 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl lg:text-6xl font-bold text-fg-primary leading-none mb-8">
+            Projects
+          </h2>
+
+          {/* Filter pills */}
+          <div className="flex flex-wrap items-center gap-2 md:gap-3">
+            {filters.map((f) => (
+              <button
+                key={f.value}
+                onClick={() => setActiveFilter(f.value)}
+                data-magnetic
+                className={`px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
+                  activeFilter === f.value
+                    ? "bg-accent-blue text-white shadow-sm"
+                    : "bg-bg-secondary text-fg-muted hover:bg-divider hover:text-fg-secondary"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
+
+        {/* Project grid — 3 columns on large screens */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.slug} project={project} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function AboutContent() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -325,50 +378,11 @@ export default function Home() {
         </motion.span>
       </section>
 
-      {/* ═══ Projects heading + Filter bar ═══ */}
-      <section id="projects" className="px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32 max-w-[1920px] mx-auto pt-16 pb-6">
-        <ScrollReveal className="mb-8">
-          <h2 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl lg:text-6xl font-bold text-fg-primary">
-            Projects
-          </h2>
-        </ScrollReveal>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center gap-3"
-        >
-          {filters.map((f) => (
-            <button
-              key={f.value}
-              onClick={() => setActiveFilter(f.value)}
-              data-magnetic
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                activeFilter === f.value
-                  ? "bg-accent-blue text-white"
-                  : "bg-bg-secondary text-fg-primary hover:bg-divider"
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* ═══ Projects section ═══ */}
-      <section className="px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32 pb-24 max-w-[1920px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 xl:gap-12">
-          {filteredProjects.map((project, i) => (
-            <ProjectCard key={project.slug} project={project} index={i} />
-          ))}
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="mx-6 md:mx-12 h-px bg-divider" />
+      {/* ═══ Projects ═══ */}
+      <ProjectsSection projects={filteredProjects} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
 
       {/* ═══ About section with parallax ═══ */}
-      <section className="py-24 md:py-32 overflow-hidden">
+      <section id="about" className="py-24 md:py-32 overflow-hidden">
         <ScrollReveal className="text-center mb-24 px-8">
           <span className="text-xs font-medium tracking-widest uppercase text-accent-blue block mb-4">
             About
