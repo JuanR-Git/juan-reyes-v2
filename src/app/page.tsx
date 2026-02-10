@@ -269,9 +269,11 @@ function AboutContent() {
             training data to the deployed model. That curiosity is what drives me.
           </p>
           <p>
-            When I&apos;m not building, you&apos;ll find me exploring new technologies,
-            tinkering with hardware, or helping others learn to code. I&apos;m always
-            looking for the next challenge that pushes me somewhere new.
+            Away from the keyboard, I like to stay moving. You&apos;ll usually find
+            me rock climbing and hiking, playing pickup basketball, swimming, or
+            at the gym. When I&apos;m winding down, I&apos;m either listening to or
+            creating music, exploring new food spots, watching movies, or
+            building legos.
           </p>
         </div>
       </ScrollReveal>
@@ -326,14 +328,9 @@ export default function Home() {
           </div>
 
           {/* Right column — Chibi avatar centered */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.6, ease: [0.23, 1, 0.32, 1] }}
-            className="hidden md:flex items-center justify-end"
-          >
+          <div className="hidden md:flex items-center justify-end">
             <ChibiAvatar className="w-[104%] lg:w-[110%] xl:w-[117%] max-w-[650px]" />
-          </motion.div>
+          </div>
         </div>
 
         {/* Centered scroll-down arrow */}

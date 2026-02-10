@@ -9,6 +9,10 @@ const SKIN_SHADOW = "#a47850";
 const HAIR = "#1a1410"; // Black hair
 const GLASSES = "#1a1a2e"; // Black glasses
 
+// Track whether the entrance animation has already played this session.
+// On client-side navigation back, we skip the entrance and show immediately.
+let hasPlayedEntrance = false;
+
 export default function ChibiAvatar({ className = "" }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -232,53 +236,66 @@ export default function ChibiAvatar({ className = "" }: { className?: string }) 
       }
     };
 
-    // Main entrance timeline
-    const meTl = gsap.timeline({
-      onComplete: addMouseEvent,
-      delay: 1,
-    });
+    // Main entrance timeline — skip animation on client-side re-navigation
+    let meTl: gsap.core.Timeline;
 
-    meTl
-      .from(svg.querySelector(".me"), {
-        duration: 1,
-        yPercent: 100,
-        ease: "elastic.out(0.5, 0.4)",
-      }, 0.5)
-      .from(svg.querySelectorAll(".head, .hair-back, .shadow"), {
-        duration: 0.9,
-        yPercent: 20,
-        ease: "elastic.out(0.58, 0.25)",
-      }, 0.6)
-      .from(svg.querySelector(".ear-right"), {
-        duration: 1,
-        rotate: 40,
-        yPercent: 10,
-        ease: "elastic.out(0.5, 0.2)",
-      }, 0.7)
-      .from(svg.querySelector(".ear-left"), {
-        duration: 1,
-        rotate: -40,
-        yPercent: 10,
-        ease: "elastic.out(0.5, 0.2)",
-      }, 0.7)
-      .to(svg.querySelector(".glasses"), {
-        duration: 1,
-        keyframes: [{ yPercent: -10 }, { yPercent: 0 }],
-        ease: "elastic.out(0.5, 0.2)",
-      }, 0.75)
-      .from(svg.querySelectorAll(".eyebrow-right, .eyebrow-left"), {
-        duration: 1,
-        yPercent: 300,
-        ease: "elastic.out(0.5, 0.2)",
-      }, 0.7)
-      .to(svg.querySelectorAll(".eye-right, .eye-left"), {
-        duration: 0.01,
-        opacity: 1,
-      }, 0.85)
-      .to(svg.querySelectorAll(".eye-right-2, .eye-left-2"), {
-        duration: 0.01,
-        opacity: 0,
-      }, 0.85);
+    if (hasPlayedEntrance) {
+      // Already played once this session — show immediately and wire up events
+      gsap.set(svg.querySelector(".me"), { opacity: 1 });
+      gsap.set(svg.querySelectorAll(".eye-right, .eye-left"), { opacity: 1 });
+      gsap.set(svg.querySelectorAll(".eye-right-2, .eye-left-2"), { opacity: 0 });
+      meTl = gsap.timeline({ onComplete: addMouseEvent });
+      // Tiny no-op tween so the timeline fires onComplete
+      meTl.to({}, { duration: 0.01 });
+    } else {
+      hasPlayedEntrance = true;
+      meTl = gsap.timeline({
+        onComplete: addMouseEvent,
+        delay: 1,
+      });
+
+      meTl
+        .from(svg.querySelector(".me"), {
+          duration: 1,
+          yPercent: 100,
+          ease: "elastic.out(0.5, 0.4)",
+        }, 0.5)
+        .from(svg.querySelectorAll(".head, .hair-back, .shadow"), {
+          duration: 0.9,
+          yPercent: 20,
+          ease: "elastic.out(0.58, 0.25)",
+        }, 0.6)
+        .from(svg.querySelector(".ear-right"), {
+          duration: 1,
+          rotate: 40,
+          yPercent: 10,
+          ease: "elastic.out(0.5, 0.2)",
+        }, 0.7)
+        .from(svg.querySelector(".ear-left"), {
+          duration: 1,
+          rotate: -40,
+          yPercent: 10,
+          ease: "elastic.out(0.5, 0.2)",
+        }, 0.7)
+        .to(svg.querySelector(".glasses"), {
+          duration: 1,
+          keyframes: [{ yPercent: -10 }, { yPercent: 0 }],
+          ease: "elastic.out(0.5, 0.2)",
+        }, 0.75)
+        .from(svg.querySelectorAll(".eyebrow-right, .eyebrow-left"), {
+          duration: 1,
+          yPercent: 300,
+          ease: "elastic.out(0.5, 0.2)",
+        }, 0.7)
+        .to(svg.querySelectorAll(".eye-right, .eye-left"), {
+          duration: 0.01,
+          opacity: 1,
+        }, 0.85)
+        .to(svg.querySelectorAll(".eye-right-2, .eye-left-2"), {
+          duration: 0.01,
+          opacity: 0,
+        }, 0.85);
+    }
 
     // Blob gradient color cycle — slow ~8s loop through blue/purple palette
     const blobGradient = gsap.timeline({ repeat: -1, yoyo: true });
@@ -397,7 +414,7 @@ export default function ChibiAvatar({ className = "" }: { className?: string }) 
             </g>
 
             {/* Neck shadow */}
-            <path className="shadow" d="M95.82 122.36h18.41v14.31s-10.5 5.54-18.41 0z" fill={SKIN_SHADOW} />
+            <path className="neck-shadow" d="M95.82 122.36h18.41v14.31s-10.5 5.54-18.41 0z" fill={SKIN_SHADOW} />
 
             <g className="head">
               {/* Left ear */}
