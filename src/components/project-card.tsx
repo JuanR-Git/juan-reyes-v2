@@ -91,7 +91,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <Link href={`/projects/${project.slug}`} className="absolute inset-0 z-0" aria-label={project.title} />
 
         {/* Thumbnail */}
-        <div className="relative overflow-hidden aspect-[4/3] bg-bg-secondary">
+        <div className="relative overflow-hidden aspect-[4/3] bg-bg-secondary pointer-events-none">
           {project.thumbnail && /\.(mp4|webm|mov)$/i.test(project.thumbnail) ? (
             <video
               src={project.thumbnail}
@@ -120,7 +120,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         {/* Content */}
-        <div className="relative p-5 md:p-6">
+        <div className="relative p-5 md:p-6 pointer-events-none">
           <span className="inline-block px-3 py-1 rounded-full text-[10px] tracking-widest uppercase font-semibold mb-3 bg-accent-blue/[0.07] text-accent-blue">
             {categoryLabels[project.category] || project.category}
           </span>
@@ -142,7 +142,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               ))}
             </div>
 
-            <div className="relative z-10 flex items-center gap-2 flex-shrink-0">
+            <div className="relative z-10 flex items-center gap-2 flex-shrink-0 pointer-events-auto">
               {project.links?.map((link) => (
                 <a
                   key={link.href}
