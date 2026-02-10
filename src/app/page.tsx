@@ -332,7 +332,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 1.6, ease: [0.23, 1, 0.32, 1] }}
             className="hidden md:flex items-center justify-end"
           >
-            <ChibiAvatar className="w-[80%] lg:w-[85%] xl:w-[90%] max-w-[500px]" />
+            <ChibiAvatar className="w-[104%] lg:w-[110%] xl:w-[117%] max-w-[650px]" />
           </motion.div>
         </div>
 

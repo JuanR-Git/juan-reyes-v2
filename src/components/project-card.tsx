@@ -19,16 +19,17 @@ const categoryLabels: Record<string, string> = {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: "100px 0px -50px 0px" });
+  const rowDelay = (index % 3) * 0.08;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.7,
-        delay: index * 0.1,
+        duration: 0.5,
+        delay: rowDelay,
         ease: [0.23, 1, 0.32, 1],
       }}
     >
